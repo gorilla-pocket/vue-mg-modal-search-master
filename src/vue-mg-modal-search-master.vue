@@ -1,11 +1,14 @@
 <template>
 <div>
     <div class="d-flex">
+        <div class="align-self-center mr-3" v-if="label">
+            {{label}}
+        </div>
         <div>
             <div class="input-group">
-                <input type="input" class="form-control" style="width:8rem;" v-model="code">
+                <input type="input" class="form-control" style="width:8rem;" v-model="code" @blur="onFind">
                 <div class="input-group-append">
-                    <button class="btn btn-primary" type="button" id="button-addon2" @click="show">Button</button>
+                    <button class="btn btn-primary" type="button" id="button-addon2" @click="show"><i class="fas fa-search"></i></button>
                 </div>
             </div>
         </div>
@@ -13,7 +16,7 @@
             {{selected_name}}
         </div>
     </div>
-    <modal-dialog :show="showModal" @close="showModal=false" @submit="ok">
+    <modal-dialog :show="showModal" @close="showModal=false">
         <template v-slot:header>
             <div class="h5 mb-0">{{title}}</div>
         </template>
@@ -37,7 +40,7 @@
                 </div>
                 <div class="mt-2">
                     <div class="d-flex justify-content-end">
-                        <button class="btn btn-primary" type="button" @click="onSearch">検索</button>
+                        <button class="btn btn-primary" type="button" :disabled="!search_code&&!search_name" @click="onSearch">検索</button>
                     </div>
                 </div>
                 <div class="mt-3">
@@ -55,6 +58,10 @@
                     </table>
                 </div>
             </slot>
+        </template>
+        <template v-slot:footer>
+            <button class="btn btn-primary" :disabled="!is_selected" @click="ok">ＯＫ</button>
+            <button class="btn btn-secondary" @click="showModal=false">キャンセル</button>
         </template>
     </modal-dialog>
 </div>
@@ -91,6 +98,7 @@ export default {
                 name: '',
             },
             selected_name: 'test',
+            is_selected: false,
         }
     },
     mounted: function () {
@@ -111,13 +119,36 @@ export default {
             this.selected.id = null
             this.selected.code = this.code
             this.selected.name = ''
+            this.search_code = ''
+            this.search_name = ''
+            this.is_selected = false
         },
         onSearch: function () {
             // this.isLoading = true
             this.$emit('search', this.search_code, this.search_name, this.callback)
         },
         callback: function (data) {
+            this.is_selected = false
             this.items = data
+        },
+        onFind: function () {
+            this.$emit('find', this.code, this.callbackFind)
+        },
+        callbackFind: function (data) {
+            let master = {
+                id: null,
+                code: '',
+                name: '',
+            }
+            if (data) {
+                master = {
+                    id: data.id,
+                    code: data.code,
+                    name: data.name
+                }
+            }
+            this.selected_name = master.name
+            this.$emit('input', master)
         },
         ok: function () {
             this.showModal = false
@@ -131,6 +162,7 @@ export default {
             this.$emit('input', master)
         },
         onClick: function (index) {
+            this.is_selected = true
             let item = this.items[index]
 
             this.selected.id = item.id

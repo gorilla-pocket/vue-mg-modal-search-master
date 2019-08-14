@@ -1,6 +1,6 @@
 <template>
   <section class="container mt-2">
-    <modal-search-master v-model="master" @search="onSearch"/>
+    <modal-search-master v-model="master" :label="label" @search="onSearch" @find="onFind"/>
     id: {{master.id}}
     code: {{master.code}}
     name: {{master.name}}
@@ -19,16 +19,28 @@ export default {
         name: 'aaaa',
       },
       items: [],
+      label: '',
 
       isLoading: false,
     }
   },
   methods: {
     onSearch: function (code, name, callback) {
-      let data = [
+      const data = [
         {id: 1, code: '10', name: 'aaaa'},
         {id: 2, code: '20', name: 'bbbb'},
       ]
+      callback(data)
+    },
+    onFind: function (code, callback) {
+      const list = [
+        {id: 1, code: '10', name: 'aaaa'},
+        {id: 2, code: '20', name: 'bbbb'},
+        {id: 3, code: '30', name: 'cccc'},
+      ]
+      const data = list.find(function (value) {
+        return value.code == code
+      })
       callback(data)
     },
   },
