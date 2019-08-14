@@ -47,7 +47,7 @@
                             <th class="text-center">名前</th>
                         </thead>
                         <tbody>
-                            <tr v-for="(item, index) in items" :key="index" @click="onClick(item)">
+                            <tr v-for="(item, index) in items" :key="index" @click="onClick(index)" :class="{ 'selected-row': item.selected }">
                                 <td>{{item.code}}</td>
                                 <td>{{item.name}}</td>
                             </tr>
@@ -107,6 +107,7 @@ export default {
             this.showModal = true
         },
         init: function () {
+            this.items = []
             this.selected.id = null
             this.selected.code = this.code
             this.selected.name = ''
@@ -129,10 +130,18 @@ export default {
             this.selected_name = this.selected.name
             this.$emit('input', master)
         },
-        onClick: function (item) {
+        onClick: function (index) {
+            let item = this.items[index]
+
             this.selected.id = item.id
             this.selected.code = item.code
             this.selected.name = item.name
+
+            this.items.forEach(function (value) {
+                value.selected = false
+            })
+            item.selected = true
+            this.items.splice(index, 1, item)
         },
     },
     components: {
@@ -142,4 +151,7 @@ export default {
 </script>
 
 <style scope>
+.selected-row {
+    background-color: #ffecb3 !important;
+}
 </style>
