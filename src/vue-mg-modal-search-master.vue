@@ -60,8 +60,8 @@
             </slot>
         </template>
         <template v-slot:footer>
-            <button class="btn btn-primary" :disabled="!is_selected" @click="ok">ＯＫ</button>
-            <button class="btn btn-secondary" @click="showModal=false">キャンセル</button>
+            <button type="button" class="btn btn-primary" :disabled="!is_selected" @click="ok">ＯＫ</button>
+            <button type="button" class="btn btn-secondary" @click="showModal=false">キャンセル</button>
         </template>
     </modal-dialog>
 </div>
