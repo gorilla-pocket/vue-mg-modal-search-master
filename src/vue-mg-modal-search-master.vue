@@ -56,6 +56,7 @@
                             </tr>
                         </tbody>
                     </table>
+                    <mg-paginate :data="items" :count-per-page="countPerPage" @change="paginateItems=$event"></mg-paginate>
                 </div>
             </slot>
         </template>
@@ -69,6 +70,7 @@
 
 <script>
 import ModalDialog from 'vue-mg-modal-dialog'
+import MgPaginate from 'vue-mg-paginate'
 export default {
     props: {
         title: {
@@ -99,6 +101,9 @@ export default {
             },
             selected_name: 'test',
             is_selected: false,
+
+            paginateItems: [],
+            countPerPage: 15,
         }
     },
     mounted: function () {
@@ -178,6 +183,7 @@ export default {
     },
     components: {
         ModalDialog,
+        MgPaginate,
     }
 }
 </script>
