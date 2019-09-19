@@ -50,7 +50,7 @@
                             <th class="text-center">名前</th>
                         </thead>
                         <tbody>
-                            <tr v-for="(item, index) in items" :key="index" @click="onClick(index)" :class="{ 'selected-row': item.selected }">
+                            <tr v-for="(item, index) in paginateItems" :key="index" @click="onClick(index)" :class="{ 'selected-row': item.selected }">
                                 <td>{{item.code}}</td>
                                 <td>{{item.name}}</td>
                             </tr>
