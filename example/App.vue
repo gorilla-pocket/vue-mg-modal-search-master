@@ -26,10 +26,12 @@ export default {
   },
   methods: {
     onSearch: function (code, name, callback) {
-      const data = [
-        {id: 1, code: '10', name: 'aaaa'},
-        {id: 2, code: '20', name: 'bbbb'},
-      ]
+      const data = []
+      for (let i = 0; i < 50; i++) {
+        data.push({
+          id: i+1, code: '10', name: 'aaaa'
+        })
+      }
       callback(data)
     },
     onFind: function (code, callback) {

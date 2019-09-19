@@ -103,7 +103,7 @@ export default {
             is_selected: false,
 
             paginateItems: [],
-            countPerPage: 15,
+            countPerPage: 8,
         }
     },
     mounted: function () {
