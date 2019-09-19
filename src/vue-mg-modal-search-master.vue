@@ -168,17 +168,17 @@ export default {
         },
         onClick: function (index) {
             this.is_selected = true
-            let item = this.items[index]
+            let item = this.paginateItems[index]
 
             this.selected.id = item.id
             this.selected.code = item.code
             this.selected.name = item.name
 
-            this.items.forEach(function (value) {
+            this.paginateItems.forEach(function (value) {
                 value.selected = false
             })
             item.selected = true
-            this.items.splice(index, 1, item)
+            this.paginateItems.splice(index, 1, item)
         },
     },
     components: {
