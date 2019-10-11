@@ -26,7 +26,7 @@
                     <div class="row">
                         <div class="col-sm-2 align-self-center">コード</div>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" v-model="search_code">
+                            <input type="text" class="form-control" v-model="search_code" @keydown.enter="onSearch">
                         </div>
                     </div>
                 </div>
@@ -34,7 +34,7 @@
                     <div class="row">
                         <div class="col-sm-2 align-self-center">名前</div>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" v-model="search_name">
+                            <input type="text" class="form-control" v-model="search_name" @keydown.enter="onSearch">
                         </div>
                     </div>
                 </div>
