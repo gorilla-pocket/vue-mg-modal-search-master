@@ -1,6 +1,17 @@
 <template>
   <section class="container mt-2">
-    <modal-search-master v-model="master" :label="label" @search="onSearch" @find="onFind"/>
+    <modal-search-master v-model="master" :label="label" @search="onSearch" @find="onFind">
+      <template v-slot:search>
+        <div class="mt-2">
+          <div class="row">
+              <div class="col-sm-2 align-self-center">追加の検索条件</div>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control">
+                </div>
+            </div>
+        </div>
+      </template>
+    </modal-search-master>
     id: {{master.id}}
     code: {{master.code}}
     name: {{master.name}}

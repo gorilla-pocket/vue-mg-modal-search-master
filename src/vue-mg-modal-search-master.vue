@@ -38,6 +38,8 @@
                         </div>
                     </div>
                 </div>
+                <slot name="search">
+                </slot>
                 <div class="mt-2">
                     <div class="d-flex justify-content-end">
                         <button class="btn btn-primary" type="button" :disabled="!search_code&&!search_name" @click="onSearch">検索</button>
