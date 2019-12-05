@@ -6,7 +6,7 @@
         </div>
         <div>
             <div class="input-group">
-                <input type="input" class="form-control" style="width:8rem;" v-model="code" @blur="onFind">
+                <input type="input" class="form-control" style="width:8rem;" v-model="code" @blur="onFind" @keydown.enter="onFind">
                 <div class="input-group-append">
                     <button class="btn btn-primary" type="button" id="button-addon2" @click="show"><i class="fas fa-search"></i></button>
                 </div>
