@@ -53,7 +53,7 @@
                         </thead>
                         <tbody>
                             <tr v-for="(item, index) in paginateItems" :key="index" @click="onClick(index)" :class="{ 'selected-row': item.selected }">
-                                <td><button type="button" class="btn btn-link text-decoration-none text-reset" @keydown.enter="ok" @focus="onClick(index)">{{item.code}}</button></td>
+                                <td><button type="button" class="btn btn-link text-decoration-none text-reset p-0" @keydown.enter="ok" @focus="onClick(index)">{{item.code}}</button></td>
                                 <td>{{item.name}}</td>
                             </tr>
                         </tbody>
