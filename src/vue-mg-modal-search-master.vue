@@ -42,7 +42,7 @@
                 </slot>
                 <div class="mt-2">
                     <div class="d-flex justify-content-end">
-                        <button class="btn btn-primary" type="button" :disabled="!search_code&&!search_name" @click="onSearch">検索</button>
+                        <button class="btn btn-primary" type="button" :disabled="!search_code&&!search_name" @click="onSearch" @keydown.enter="onSearch">検索</button>
                     </div>
                 </div>
                 <div class="mt-3">
@@ -53,7 +53,7 @@
                         </thead>
                         <tbody>
                             <tr v-for="(item, index) in paginateItems" :key="index" @click="onClick(index)" :class="{ 'selected-row': item.selected }">
-                                <td>{{item.code}}</td>
+                                <td><button type="button" class="btn btn-link text-decoration-none text-reset" @keydown.enter="ok" @focus="onClick(index)">{{item.code}}</button></td>
                                 <td>{{item.name}}</td>
                             </tr>
                         </tbody>
@@ -193,5 +193,8 @@ export default {
 <style scope>
 .selected-row {
     background-color: #ffecb3 !important;
+}
+.btn-link {
+    pointer-events: none;
 }
 </style>
