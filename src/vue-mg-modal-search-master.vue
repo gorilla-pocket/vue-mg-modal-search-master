@@ -114,7 +114,15 @@ export default {
         this.selected_name = this.value.name
     },
     watch: {
-        //
+        /* eslint-disable */
+        value: {
+            handler: function () {
+                this.code = this.value.code
+                this.selected_name = this.value.name
+            },
+            deep: true
+        }
+        /* eslint-disable */
     },
     methods: {
         show: function () {
