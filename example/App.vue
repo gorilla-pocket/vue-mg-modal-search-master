@@ -33,6 +33,7 @@
       id: {{master2.id}}
       code: {{master2.code}}
       name: {{master2.name}}
+      other: {{master2.other}}
     </section>
     <input type="button" @click="click">
   </div>
@@ -65,15 +66,15 @@ export default {
       const data = []
       for (let i = 0; i < 50; i++) {
         data.push({
-          id: i+1, code: '10', name: 'aaaa'
+          id: i+1, code: '10', name: 'aaaa', other: 'bbbb',
         })
       }
       callback(data)
     },
     onFind: function (code, callback) {
       const list = [
-        {id: 1, code: '10', name: 'aaaa'},
-        {id: 2, code: '20', name: 'bbbb'},
+        {id: 1, code: '10', name: 'aaaa', other: 'other1' },
+        {id: 2, code: '20', name: 'bbbb', other: 'other2'},
         {id: 3, code: '30', name: 'cccc'},
       ]
       const data = list.find(function (value) {

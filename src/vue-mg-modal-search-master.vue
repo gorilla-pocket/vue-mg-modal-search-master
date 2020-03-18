@@ -12,8 +12,8 @@
                 </div>
             </div>
         </div>
-        <div class="align-self-center ml-2">
-            {{selected_name}}
+        <div class="align-self-center ml-2" v-if="selected">
+            {{selected.name}}
         </div>
     </div>
     <modal-dialog :show="showModal" @close="showModal=false">
@@ -96,12 +96,12 @@ export default {
             code: '',
             search_code: '',
             search_name: '',
-            selected: {
+            default_selected: {
                 id: null,
                 code: '',
                 name: '',
             },
-            selected_name: 'test',
+            selected: null,
             is_selected: false,
 
             paginateItems: [],
@@ -111,18 +111,16 @@ export default {
     mounted: function () {
         this.items = []
         this.code = this.value.code
-        this.selected_name = this.value.name
+        this.selected = this.value
     },
     watch: {
-        /* eslint-disable */
         value: {
             handler: function () {
                 this.code = this.value.code
-                this.selected_name = this.value.name
+                this.selected = this.value
             },
             deep: true
         }
-        /* eslint-disable */
     },
     methods: {
         show: function () {
@@ -131,15 +129,11 @@ export default {
         },
         init: function () {
             this.items = []
-            this.selected.id = null
-            this.selected.code = this.code
-            this.selected.name = ''
             this.search_code = ''
             this.search_name = ''
             this.is_selected = false
         },
         onSearch: function () {
-            // this.isLoading = true
             this.$emit('search', this.search_code, this.search_name, this.callback)
         },
         callback: function (data) {
@@ -150,39 +144,22 @@ export default {
             this.$emit('find', this.code, this.callbackFind)
         },
         callbackFind: function (data) {
-            let master = {
-                id: null,
-                code: '',
-                name: '',
-            }
             if (data) {
-                master = {
-                    id: data.id,
-                    code: data.code,
-                    name: data.name
-                }
+                this.selected = data
+            } else {
+                this.selected = JSON.parse(JSON.stringify(this.default_selected))
             }
-            this.selected_name = master.name
-            this.$emit('input', master)
+            this.$emit('input', this.selected)
         },
         ok: function () {
             this.showModal = false
-            let master = {
-                id: this.selected.id,
-                code: this.selected.code,
-                name: this.selected.name
-            }
             this.code = this.selected.code
-            this.selected_name = this.selected.name
-            this.$emit('input', master)
+            this.$emit('input', this.selected)
         },
         onClick: function (index) {
             this.is_selected = true
             let item = this.paginateItems[index]
-
-            this.selected.id = item.id
-            this.selected.code = item.code
-            this.selected.name = item.name
+            this.selected = item
 
             this.paginateItems.forEach(function (value) {
                 value.selected = false
