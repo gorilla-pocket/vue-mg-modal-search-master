@@ -21,7 +21,7 @@
     "build:unpkg": "cross-env NODE_ENV=production rollup --config build/rollup.config.js --format iife"
   },
   "dependencies": {
-    "vue-mg-modal-dialog": "^1.0.6",
+    "vue-mg-modal-dialog": "^1.0.11",
     "vue-mg-paginate": "^1.0.3"
   },
   "devDependencies": {

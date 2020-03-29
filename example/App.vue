@@ -18,7 +18,7 @@
       name: {{master.name}}
     </section>
     <section class="container mt-2">
-      <modal-search-master v-model="master2" :label="label" @search="onSearch" @find="onFind">
+      <modal-search-master v-model="master2" :label="label" hide-name @search="onSearch" @find="onFind">
         <template v-slot:search>
           <div class="mt-2">
             <div class="row">

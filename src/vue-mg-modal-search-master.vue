@@ -12,7 +12,7 @@
                 </div>
             </div>
         </div>
-        <div class="align-self-center ml-2" v-if="selected">
+        <div class="align-self-center ml-2" v-if="selected&&!hideName">
             {{selected.name}}
         </div>
     </div>
@@ -87,6 +87,10 @@ export default {
                 code: '',
                 name: '',
             }
+        },
+        hideName: {
+            type: Boolean,
+            default: false
         }
     },
     data () {
